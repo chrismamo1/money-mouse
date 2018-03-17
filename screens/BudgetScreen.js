@@ -8,9 +8,9 @@ import {
 import { ExpoConfigView } from '@expo/samples';
 import { Ionicons } from '@expo/vector-icons';
 
-export default class SettingsScreen extends React.Component {
+export default class BudgetScreen extends React.Component {
   static navigationOptions = {
-    title: 'Settings'
+    title: 'Budget'
   };
 
   render() {
@@ -18,7 +18,7 @@ export default class SettingsScreen extends React.Component {
      * content, we just wanted to give you a quick view of your config */
     return (
       <View style={styles.container} contentContainerStyle={[styles.contentContainer, styles.centered]}>
-        <Text>You will be able to add categories here.</Text>
+        <Text>Your budget will go here</Text>
       </View>
     );
   }

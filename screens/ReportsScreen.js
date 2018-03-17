@@ -1,24 +1,18 @@
 import Colors from '../constants/Colors';
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View
- } from 'react-native';
-import { ExpoConfigView } from '@expo/samples';
+import { View, StyleSheet, Text } from 'react-native';
+import { ExpoLinksView } from '@expo/samples';
 import { Ionicons } from '@expo/vector-icons';
 
-export default class SettingsScreen extends React.Component {
+export default class ReportsScreen extends React.Component {
   static navigationOptions = {
-    title: 'Settings'
+    title: 'Reports'
   };
 
   render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
     return (
       <View style={styles.container} contentContainerStyle={[styles.contentContainer, styles.centered]}>
-        <Text>You will be able to add categories here.</Text>
+        <Text>Your reports will go here</Text>
       </View>
     );
   }

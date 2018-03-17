@@ -5,21 +5,25 @@ import { TabNavigator, TabBarBottom } from 'react-navigation';
 
 import Colors from '../constants/Colors';
 
-import HomeScreen from '../screens/HomeScreen';
-import LinksScreen from '../screens/LinksScreen';
+import CalendarScreen from '../screens/CalendarScreen';
+import ReportsScreen from '../screens/ReportsScreen';
+import BudgetScreen from '../screens/BudgetScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 export default TabNavigator(
   {
-    Home: {
-      screen: HomeScreen,
+    Calendar: {
+      screen: CalendarScreen,
     },
-    Links: {
-      screen: LinksScreen,
+    Reports: {
+      screen: ReportsScreen,
+    },
+    Budget: {
+      screen: BudgetScreen,
     },
     Settings: {
       screen: SettingsScreen,
-    },
+    }
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -27,18 +31,18 @@ export default TabNavigator(
         const { routeName } = navigation.state;
         let iconName;
         switch (routeName) {
-          case 'Home':
-            iconName =
-              Platform.OS === 'ios'
-                ? `ios-information-circle${focused ? '' : '-outline'}`
-                : 'md-information-circle';
+          case 'Calendar':
+            iconName = 'md-calendar';
             break;
-          case 'Links':
-            iconName = Platform.OS === 'ios' ? `ios-link${focused ? '' : '-outline'}` : 'md-link';
+          case 'Reports':
+            iconName = 'md-clipboard';
+            break;
+          case 'Budget':
+            iconName = 'md-cash';
             break;
           case 'Settings':
-            iconName =
-              Platform.OS === 'ios' ? `ios-options${focused ? '' : '-outline'}` : 'md-options';
+            iconName = 'md-settings';
+            break;
         }
         return (
           <Ionicons
@@ -54,5 +58,7 @@ export default TabNavigator(
     tabBarPosition: 'bottom',
     animationEnabled: false,
     swipeEnabled: false,
+    activeTintColor: Colors.tabIconSelected,
+    inactiveTintColor: Colors.tabIconDefault,
   }
 );
