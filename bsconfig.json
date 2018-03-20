@@ -1,0 +1,15 @@
+{
+  "name": "money-mouse",
+  "bsc-flags": ["-bs-gen-tds"],
+  "bs-dependencies": ["reason-react"],
+  "reason": {
+    "react-jsx": 2
+  },
+  "sources": {
+    "dir": "mm"
+  },
+  "js-post-build": {
+    "cmd": "echo built $file"
+  },
+  "refmt": 3
+}

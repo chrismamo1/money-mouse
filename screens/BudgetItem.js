@@ -4,21 +4,22 @@ import {
   StyleSheet,
   Text,
   View
- } from 'react-native';
-import { ExpoConfigView } from '@expo/samples';
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-export default class BudgetScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Budget'
-  };
+export default class BudgetItem {
+  constructor(props) {
+    super(props);
+    this.state = this.state || {};
+    this.state.category = props.catName;
+  }
 
   render() {
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
-    return (
-      <View style={styles.container} contentContainerStyle={[styles.contentContainer, styles.centered]}>
-        <Text>Your budget will go here</Text>
+    return(
+      <View style={styles.verticalContainer}>
+        <Text style={styles.bigText}>{this.props.catName}</Text>
+        <View style={styles.horizontalContainer}>
+        </View>
       </View>
     );
   }

@@ -14,6 +14,9 @@ export default TabNavigator(
   {
     Calendar: {
       screen: CalendarScreen,
+      navigationOptions: {
+        header: null
+      }
     },
     Reports: {
       screen: ReportsScreen,
