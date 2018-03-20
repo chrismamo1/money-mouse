@@ -1,13 +1,37 @@
 type t =
   { balance: list(Money.t)
   , bills: list(Bill.t)
+  , categories: list(Spending_category.t)
+  , purchases: list((string, string, float, Date.t))
   };
 
 let model =
   ref(
     { balance: [Money.({currency: Currency.USD, amount: 1000.0})]
     , bills: []
+    , categories:
+      [ Spending_category.make("Rent", `Monthly, 250.0)
+      , Spending_category.make("Gas", `Daily, 10.0)
+      , Spending_category.make("Groceries", `Weekly, 30.0)
+      , Spending_category.make("Eating Out", `Monthly, 200.0)
+      ]
+    , purchases: []
     });
+
+let getCategoriesArray() = Array.of_list(model.contents.categories);
+
+let addCategory(nam) = {
+  let model' = {...model.contents, categories: [nam, ...model.contents.categories]};
+  model.contents = model'
+};
+
+let removeCategory(nam) = {
+  let cats =
+    model.contents.categories
+    |> List.filter((x) => x##name != nam);
+  let model' = {...model.contents, categories: cats};
+  model.contents = model'
+};
 
 let addBill(owedTo, schedule, amount, startingOn) = {
   let bill =

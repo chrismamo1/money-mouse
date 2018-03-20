@@ -27,8 +27,6 @@ import { TextInputMask } from 'react-native-masked-text';
 
 import * as Model from '../lib/js/mm/mm_model.js';
 
-console.log("Testing before class");
-
 class MainCalendarScreen extends React.Component {
   static navigationOptions = {
     title: 'Calendar',
@@ -62,26 +60,16 @@ class MainCalendarScreen extends React.Component {
   }
 
   render() {
-    console.log("Testing");
     let _handleDayPress = (day) => {
       let asDate = new Date(day.year, day.month - 1, day.day);
       console.log(asDate.toDateString());
       this.props.navigation.navigate('BillAddScreen', {activeBillDate: asDate});
     };
-    console.log('Marks: ', this.state.marks);
-    //const marks = this.state.marks;
-    const marks = {
-      "2018-3-22": {
-        "selected": true,
-        "selectedColor": "blue",
-        "marked": true
-      }
-    };
+    const marks = this.state.marks;
     let calendar =
       (marks)
         ? <Calendar markedDates={marks} onDayPress={_handleDayPress} />
         : <Calendar onDayPress={_handleDayPress} />;
-    console.log(calendar);
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={[styles.contentContainer,styles.centered]}>
