@@ -11,7 +11,7 @@ import {
 import { ExpoConfigView } from '@expo/samples';
 import { Ionicons } from '@expo/vector-icons';
 
-import * as Model from '../lib/js/mm/mm_model.js';
+import * as Model from '../lib/es6/mm/mm_model.js';
 import BudgetItem from './BudgetItem';
 
 export default class BudgetScreen extends React.Component {

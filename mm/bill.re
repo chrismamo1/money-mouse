@@ -14,5 +14,14 @@ type t =
   , owedTo: string
   , method: [ `Cash | `Wire | `CC | `Debit ]
   , amount: [ `Fixed(Money.t) ]
-  , history: list((Date.t, Money.t, string))
+  , category: string
   };
+
+let getAmount(t) =
+  switch t.amount {
+  | `Fixed(x) => x
+  };
+
+let getOwedTo(t) = t.owedTo;
+
+let getDescription(t) = t.description;

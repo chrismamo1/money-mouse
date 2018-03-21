@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import * as Model from '../lib/js/mm/mm_model.js';
+import * as Model from '../lib/es6/mm/mm_model.js';
 
 export default class BudgetItem extends React.Component {
   constructor(props) {
@@ -21,7 +21,15 @@ export default class BudgetItem extends React.Component {
   render() {
     return(
       <View style={[styles.horizontalContainer, {margin: 15, justifyContent: 'space-between'}]}>
-        <Text style={[styles.bigText, {flex: 1}]}>{this.state.category}</Text>
+        <View
+          style={{
+            margin: 15,
+            marginLeft: 0,
+            width: 15,
+            height: 15,
+            backgroundColor: Model.getCategoryColor(this.state.category)
+          }} />
+        <Text style={[styles.bigText, {flex: 1, marginTop: 8}]}>{this.state.category}</Text>
         <View style={{flex: 1}} />
         <Button
           onPress={
@@ -31,6 +39,7 @@ export default class BudgetItem extends React.Component {
               this.props.mom.updateCategories()
             }}
           title="Remove"
+          color="red"
           style={[styles.bigText, {flex: 1}]} />
       </View>
     );

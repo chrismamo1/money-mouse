@@ -23,9 +23,10 @@ import { StackNavigator } from 'react-navigation';
 
 import { TextInputMask } from 'react-native-masked-text';
 
-import * as Date from '../lib/js/mm/date.js';
-import * as Mm_model from '../lib/js/mm/mm_model.js';
-import * as Bill from '../lib/js/mm/bill.js';
+import * as Mm_model from '../lib/es6/mm/mm_model.js';
+import * as Date from '../lib/es6/mm/date.js';
+import * as Bill from '../lib/es6/mm/bill.js';
+import * as MoneyModel from '../lib/es6/mm/money.js';
 
 let Model = Mm_model;
 
@@ -55,10 +56,12 @@ export default class BillAddScreen extends React.Component {
       scheduleType: 'Monthly',
       scheduleValue: this.params.activeBillDate.getDate()
     };
+    this.params.category = "Rent";
   }
 
   onChangeAmount(amt) {
     let x = parseFloat(amt.replace('$', '').replace(',', ''));
+    console.log('billAmount: ', x);
     this.setState({billAmount: x, amountText: amt})
   }
 
@@ -92,7 +95,7 @@ export default class BillAddScreen extends React.Component {
       sched = Bill.monthlyInterval(this.state.scheduleValue);
       break;
     };
-    Model.addBill(this.state.valueCompany, sched, this.state.billAmount, this.params.activeBillDate);
+    Model.addBill(this.state.valueCompany, sched, MoneyModel.makeUsd(this.state.billAmount), this.params.activeBillDate, this.state.category);
     this.props.navigation.navigate('MainCalendarScreen');
   }
 
@@ -215,13 +218,23 @@ export default class BillAddScreen extends React.Component {
           </KeyboardAvoidingView>
           <View
             style={[styles.container, {flexDirection: 'row'}]}>
+            <Text style={[textStyle, {flex: 1}]}>Category</Text>
+            <Picker
+              style={{flex: 1}}
+              selectedValue={this.state.category}
+              onValueChange={(x) => { this.setState({category: x })}}>
+              { Model.getCategoriesArray().map((x, _) => <Picker.Item key={x.name} label={x.name} value={x.name} />) }
+            </Picker>
+          </View>
+          <View
+            style={[styles.container, {flexDirection: 'row'}]}>
             <Text style={[textStyle, {flex: 1}]}>Period</Text>
             <Picker
               style={{flex: 1}}
               selectedValue={this.state.scheduleType}
               onValueChange={this.onChangeScheduleType.bind(this)}>
-              <Picker.Item label="Monthly (regular)" value="Monthly" />
-              <Picker.Item label="Monthly (irregular)" value="MonthlyOnWeekday" />
+              <Picker.Item label="Monthly" value="Monthly" />
+              <Picker.Item label="Weekly" value="Weekly" />
               <Picker.Item label="Fixed interval" value="Fixed" />
             </Picker>
           </View>

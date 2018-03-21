@@ -24,11 +24,27 @@ type day =
 type t = Js.t({
   .
   [@bs.meth] getDate: unit => int,
-  [@bs.meth] getDay: unit => int,
-  [@bs.meth] getMonth: unit => int,
+  [@bs.meth] getDay: unit => day,
+  [@bs.meth] getMonth: unit => month,
   [@bs.meth] getFullYear: unit => int,
   [@bs.meth] toDateString: unit => string
 });
+
+let int_of_month(month) =
+  switch month {
+  | January => 0
+  | February => 1
+  | March => 2
+  | April => 3
+  | May => 4
+  | June => 5
+  | July => 6
+  | August => 7
+  | September => 8
+  | October => 9
+  | November => 10
+  | December => 11
+  };
 
 let int_of_day(day) =
   switch (day) {
@@ -41,16 +57,20 @@ let int_of_day(day) =
   | Saturday => 6
   };
 
-let date_of_int: (int) => t = [%bs.raw {|function(x) { new Date(x) }|}];
+let date_of_int: (int) => t = [%bs.raw {|function(x) { return new Date(x) }|}];
+
+let date_of_float: (float) => t = [%bs.raw {|function(x) { return new Date(x) }|}];
+
+let int_of_date: (t) => int = [%bs.raw {|((x) => x - 0)|}];
 
 let beginningOfMonth(t) = {
   let aux: (int, int) => t = [%bs.raw {|((y, m) => new Date(y, m, 1))|}];
-  aux(t##getFullYear(), t##getMonth())
+  aux(t##getFullYear(), int_of_month(t##getMonth()))
 };
 
 let beginningOfNextMonth(t) = {
   let aux: (int, int) => t = [%bs.raw {|((y, m) => new Date(y, m, 1))|}];
-  aux(t##getFullYear(), (t##getMonth()) + 1)
+  aux(t##getFullYear(), int_of_month((t##getMonth())) + 1)
 };
 
 let make(year, month, day) = {
@@ -59,7 +79,7 @@ let make(year, month, day) = {
 };
 
 module Infix = {
-  let (-)(a, b) = {
+  let (-)(a: t, b: t) = {
     let f': (t, t) => float = [%bs.raw {|function(a, b) {
       if (a instanceof Date && b instanceof Date) {
         return a - b;
@@ -107,4 +127,22 @@ let dayToString(day) =
   | Thursday => "Thursday"
   | Friday => "Friday"
   | Saturday => "Saturday"
+  };
+
+let dateToString(t) = t##getFullYear() ++ "-" ++ string_of_int(int_of_month(t##getMonth()) + 1) ++ "-" ++ t##getDate();
+
+let monthToString(month) =
+  switch month {
+  | January => "January"
+  | February => "February"
+  | March => "March"
+  | April => "April"
+  | May => "May"
+  | June => "June"
+  | July => "July"
+  | August => "August"
+  | September => "September"
+  | October => "October"
+  | November => "November"
+  | December => "December"
   };
