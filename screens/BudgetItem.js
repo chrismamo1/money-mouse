@@ -5,6 +5,7 @@ import {
   ProgressBarAndroid,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,6 +17,7 @@ export default class BudgetItem extends React.Component {
     super(props);
     this.state = this.state || {};
     this.state.category = props.category.name;
+    this.parent = props.parent;
   }
 
   render() {
@@ -31,16 +33,13 @@ export default class BudgetItem extends React.Component {
           }} />
         <Text style={[styles.bigText, {flex: 1, marginTop: 8}]}>{this.state.category}</Text>
         <View style={{flex: 1}} />
-        <Button
+        <TouchableOpacity
           onPress={
             () => {
-              Model.removeCategory(this.state.category);
-              console.log('Removing category ' + this.state.category);
-              this.props.mom.updateCategories()
-            }}
-          title="Remove"
-          color="red"
-          style={[styles.bigText, {flex: 1}]} />
+              this.parent.props.navigation.navigate('CategoryAddScreen');
+            }}>
+          <Ionicons name="md-settings" size={32} color="green" />
+        </TouchableOpacity>
       </View>
     );
   }
