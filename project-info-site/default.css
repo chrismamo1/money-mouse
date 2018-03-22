@@ -1,0 +1,82 @@
+body {
+        margin: auto;
+        margin: auto;
+        background: #DCEAFC;
+        text-align: justify;
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        text-align: justify;
+        color: #333399;
+}
+header {
+        border: 10px solid;
+        padding: 10px;
+        height: 100px;
+        margin: 0px auto 0px auto;
+        width: 760px;
+        background-color: lightblue;
+        /*font-size: xx-large;
+        font-weight: bold;*/
+}
+nav.mainNav {
+        border: 10px solid;
+        border-top: none;
+        margin: 0px auto 0px auto;
+        width: 780px;
+}
+nav.mainNav ul {
+        list-style-type: none;
+        margin: auto;
+        padding: 0px;
+        background-color: dodgerblue;
+        text-align: center;
+        overflow: hidden;
+}
+nav.mainNav li {
+        float: left;
+        width: 120px;
+}
+nav.mainNav li a {
+        display: block;
+        padding: 8px 16px;
+        color: #000000;
+        text-decoration: none;
+}
+nav.mainNav li a:hover {
+        color: white;
+        background-color: skyblue;
+}
+section {
+        border: 10px solid;
+        border-top: none;
+        margin: 0px auto 0px auto;
+        padding: 20px;
+        width: 740px;
+}
+section a {
+        color: red;
+}
+div.img {
+        float: left;
+        width: 100px;
+        height: 100px;
+        padding: 5px;
+        border: 5px solid;
+        margin: 5px;
+}
+p {
+        overflow: hidden;
+}
+section table {
+        border-collapse: collapse;
+        width: 100%;
+}
+th {
+        padding: 8px;
+        text-align: center;
+        border-bottom: 1px solid #244882;
+}
+td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #244882;
+}
