@@ -14,7 +14,7 @@ import { StackNavigator } from 'react-navigation';
 
 import * as Model from '../lib/es6/mm/mm_model.js';
 import BudgetItem from './BudgetItem';
-import CategoryAddScreen from './CategoryAddScreen.js';
+import ModifyCategoryScreen from './ModifyCategoryScreen.js';
 
 class MainBudgetScreen extends React.Component {
   static navigationOptions = {
@@ -30,8 +30,8 @@ class MainBudgetScreen extends React.Component {
       let items =
         categories.map(
           (nam, i) => {
-            console.log('making ', nam);
-            return <BudgetItem key={nam + i} mom={self} category={nam} parent={this} />
+            //console.log('making ', nam);
+            return <BudgetItem key={nam + i} mom={self} category={nam} parent={self} />
           });
       return items;
     };
@@ -40,6 +40,9 @@ class MainBudgetScreen extends React.Component {
     this.updateCategories = this.updateCategories.bind(this);
     this.pushCategory = this.pushCategory.bind(this);
     this.getItems = getItems;
+    let self = this;
+    //console.log('this.props.navigation: ', this.props.navigation);
+    //this.props.navigation.addListener('willFocus', ((x) => self.updateCategories()));
   }
 
   updateCategories() {
@@ -54,6 +57,7 @@ class MainBudgetScreen extends React.Component {
   }
 
   render() {
+    console.log('this.props.navigation: ', this.props.navigation);
     let footer, header;
     if (this.state.addingCategory) {
       header = (
@@ -89,8 +93,8 @@ let BudgetScreen = StackNavigator(
     MainBudgetScreen: {
       screen: MainBudgetScreen,
     },
-    CategoryAddScreen: {
-      screen: CategoryAddScreen,
+    ModifyCategoryScreen: {
+      screen: ModifyCategoryScreen,
     }
   }
 );

@@ -1,3 +1,4 @@
+[@bs.deriving accessors]
 type month =
   | January
   | February
@@ -12,6 +13,7 @@ type month =
   | November
   | December;
 
+[@bs.deriving accessors]
 type day =
   | Sunday
   | Monday
@@ -57,6 +59,8 @@ let int_of_day(day) =
   | Saturday => 6
   };
 
+let dayOfMillis = 24.0 *. 60.0 *. 60.0 *. 1_000.0;
+
 let date_of_int: (int) => t = [%bs.raw {|function(x) { return new Date(x) }|}];
 
 let date_of_float: (float) => t = [%bs.raw {|function(x) { return new Date(x) }|}];
@@ -70,6 +74,8 @@ let beginningOfMonth(t) = {
 
 let beginningOfNextMonth(t) = {
   let aux: (int, int) => t = [%bs.raw {|((y, m) => new Date(y, m, 1))|}];
+  /* don't need to handle months here because the JS Date constructor does it
+     automatically */
   aux(t##getFullYear(), int_of_month((t##getMonth())) + 1)
 };
 
@@ -79,7 +85,7 @@ let make(year, month, day) = {
 };
 
 module Infix = {
-  let (-)(a: t, b: t) = {
+  let (-)(a: t, b: t): float = {
     let f': (t, t) => float = [%bs.raw {|function(a, b) {
       if (a instanceof Date && b instanceof Date) {
         return a - b;
@@ -89,7 +95,7 @@ module Infix = {
     }|}];
     switch (f'(a, b)) {
     | x when x === nan => raise(Failure("Invalid types in date difference operation"))
-    | x => int_of_float(x)
+    | x => x
     }
   };
 
@@ -105,7 +111,7 @@ module Infix = {
   };
 
   let (+)(a, b): t = {
-    let f': (t, int) => t = [%bs.raw {|function(a, b) {
+    let f': (t, float) => t = [%bs.raw {|function(a, b) {
       if (a instanceof Date) {
         return new Date((a - 0) + b);
       } else {
