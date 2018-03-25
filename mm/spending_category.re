@@ -1,3 +1,4 @@
+[@bs.deriving accessors]
 type period =
   | Monthly
   | Weekly
@@ -14,6 +15,23 @@ type t =
 
 let make(name, period, amount, color): t =
   {"name": name, "period": period, "amount": amount, "color": color};
+
+let getFormattedAmountString(t) = {
+  let intPart = int_of_float(t##amount);
+  let rec aux(acc, x) =
+    switch (x mod 1_000) {
+    | 0 => acc
+    | n => aux([string_of_int(n), ...acc], x / 1_000)
+    };
+  let parts = aux([], intPart);
+  Js.log2("Parts: ", parts);
+  let wholePart = String.concat(",", parts);
+  Js.log2("wholePart: ", wholePart);
+  let decPart = String.sub(Printf.sprintf("%.2f", t##amount -. float_of_int(intPart)), 1, 3);
+  let rv = "$" ++ wholePart ++ decPart;
+  Js.log2("Made amount string: ", rv);
+  rv
+};
 
 let getPeriodString(t) =
   switch (t##period) {
