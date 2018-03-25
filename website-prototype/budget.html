@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!--
+Design by TEMPLATED
+http://templated.co
+Released for free under the Creative Commons Attribution License
+
+Name       : Skeleton 
+Description: A two-column, fixed-width design with dark color scheme.
+Version    : 1.0
+Released   : 20130902
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+<link href="default.css" rel="stylesheet" type="text/css" media="all" />
+<link href="fonts.css" rel="stylesheet" type="text/css" media="all" />
+
+<!--[if IE 6]><link href="default_ie6.css" rel="stylesheet" type="text/css" /><![endif]-->
+
+</head>
+<body>
+<div id="page" class="container">
+	<div id="header">
+		<div id="logo">
+			<img src="images/" alt="" />
+			<h1><a href="index.html">Money Mouse</a></h1>
+			
+		</div>
+		<div id="menu">
+			<ul>
+				<li><a href="index.html" accesskey="1" title="">Homepage</a></li>
+				<li  class="current_page_item"><a href="budget.html" accesskey="2" title="">Budget</a></li>
+				<li><a href="addBill.html" accesskey="3" title="">Calendar</a></li>
+				<li><a href="reports.html" accesskey="4" title="">Reports</a></li>
+				<li><a href="settings.html" accesskey="5" title="">Settings</a></li>
+			</ul>
+		</div>
+	</div>
+	<div id="main">
+        <h2>Budget</h2>
+        <ul class="style1">
+            <li class="first">
+               <p><button class="button" id="necess">Necessities</button> <strong>$719.30</strong> remaining<br /></p>
+            </li>
+            <li>
+                <p><button class="button" id="eatOut">Eating Out</button> <strong>$136.88</strong> remaining<br /></p>
+            </li>
+            <li>
+                <p><button class="button" id="gas">Gas</button> <strong> $300.00</strong> remaining<br /></p>
+            </li>
+            <li>
+                <p><button class="button" id="luxury">Luxury</button> <strong>$160.00</strong> remaining</p>
+            </li>
+        </ul>
+        
+        <button class="button" id="edit">Edit Budget</button>
+        <div id="copyright">
+            <span> This is a non-functional prototype intended to give a basic idea of the interface<br /></span>
+            
+            <span>Based on the template <strong>Privy</strong> by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.This free template is released under the <a href="http://templated.co/license">Creative Commons Attribution</a> license </span>
+		</div>
+  </div>
+
+    <!-- Necessities Modal-->
+    <div id="necessModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>
+                You set your <strong>Necessities</strong> budget to be <strong>$1400.00</strong><br />
+                - $80.57  Walmart <br />
+                - $400.00 Rent <br />
+                - $200.13 Comcast Bill<br />
+                ___________________________________<br />
+                $719.30 remaining                
+            </p>
+        </div>
+    </div>
+    
+    <!-- Eating Out Modal -->
+    <div id="eatingOutModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>
+                You set your <strong>Eating Out</strong> budget to be <strong>$200.00</strong><br />
+                - $63.12  Sushi Hana <br />
+                ___________________________________<br />
+                $136.88 remaining
+            </p>
+        </div>
+    </div>
+        
+    <!-- Gas Modal -->
+    <div id="gasModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>
+                You set your <strong>Gas</strong> budget to be <strong>$300.00</strong><br />
+                ___________________________________<br />
+                $300.00 remaining
+            </p>
+        </div>
+    </div>
+    
+    <!-- Luxury Modal -->
+    <div id="luxModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>
+                You set your <strong>Luxury</strong> budget to be <strong>$200.00</strong><br />
+                - $40.00 Walmart<br />
+                ___________________________________<br />
+                $160.00 remaining
+            </p>
+        </div>
+    </div>
+       
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>
+            Category to edit: <br />
+            <select>
+                <option value="necessities">Necessities</option>
+                <option value="eatingOut">Eating Out</option>
+                <option value="gas">Gas</option>
+                <option value="luxury">Luxury</option>
+            </select><br />
+            Or add a category: <input type="text" placeholder="new category"><br />
+            
+            Budget Amount: <input type="number" step="0.01" placeholder="set budget amount"><br />
+            <button type="submit" id="submit">Submit</button>
+            </p>
+        </div>
+    </div>
+
+	</div>
+</body>
+<script src="budget.js"></script>
+</html>
