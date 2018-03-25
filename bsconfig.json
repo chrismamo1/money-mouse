@@ -5,11 +5,19 @@
   "reason": {
     "react-jsx": 2
   },
+  "icon": "./assets/images/icon.png",
   "sources": {
     "dir": "mm"
   },
   "js-post-build": {
     "cmd": "echo built $file"
+  },
+  "android": {
+    "package": "com.nmt.moneymouse"
+  },
+  "package-specs": {
+    "module": "es6",
+    "in-source": false
   },
   "refmt": 3
 }

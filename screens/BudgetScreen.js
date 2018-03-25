@@ -10,13 +10,16 @@ import {
  } from 'react-native';
 import { ExpoConfigView } from '@expo/samples';
 import { Ionicons } from '@expo/vector-icons';
+import { StackNavigator } from 'react-navigation';
 
-import * as Model from '../lib/js/mm/mm_model.js';
+import * as Model from '../lib/es6/mm/mm_model.js';
 import BudgetItem from './BudgetItem';
+import CategoryAddScreen from './CategoryAddScreen.js';
 
-export default class BudgetScreen extends React.Component {
+class MainBudgetScreen extends React.Component {
   static navigationOptions = {
-    title: 'Budget'
+    title: 'Budget',
+    header: null
   };
 
   constructor(props) {
@@ -28,7 +31,7 @@ export default class BudgetScreen extends React.Component {
         categories.map(
           (nam, i) => {
             console.log('making ', nam);
-            return <BudgetItem key={nam + i} mom={self} category={nam} />
+            return <BudgetItem key={nam + i} mom={self} category={nam} parent={this} />
           });
       return items;
     };
@@ -80,6 +83,19 @@ export default class BudgetScreen extends React.Component {
     );
   }
 }
+
+let BudgetScreen = StackNavigator(
+  {
+    MainBudgetScreen: {
+      screen: MainBudgetScreen,
+    },
+    CategoryAddScreen: {
+      screen: CategoryAddScreen,
+    }
+  }
+);
+
+export default BudgetScreen;
 
 const styles = StyleSheet.create({
   container: {

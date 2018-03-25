@@ -20,6 +20,9 @@ export default TabNavigator(
     },
     Reports: {
       screen: ReportsScreen,
+      navigationOptions: {
+        header: null
+      },
     },
     Budget: {
       screen: BudgetScreen,

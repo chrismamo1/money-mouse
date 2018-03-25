@@ -1,4 +1,5 @@
 import BillAddScreen from './BillAddScreen.js';
+import BillList from './BillList.js';
 
 import Colors from '../constants/Colors';
 import React from 'react';
@@ -25,7 +26,7 @@ import { StackNavigator } from 'react-navigation';
 
 import { TextInputMask } from 'react-native-masked-text';
 
-import * as Model from '../lib/js/mm/mm_model.js';
+import * as Model from '../lib/es6/mm/mm_model.js';
 
 class MainCalendarScreen extends React.Component {
   static navigationOptions = {
@@ -42,7 +43,7 @@ class MainCalendarScreen extends React.Component {
 
   updateMarks() {
     console.log('About to get dates');
-    let dates = Model.getBillsForMonth(2018, new Date().getMonth());
+    let dates = Model.getBillsForMonth(2018, new Date().getMonth()).map((x, _) => x.date);
     console.log('Dates: ', dates);
     let marks = {};
     for (let i in dates) {
@@ -55,6 +56,7 @@ class MainCalendarScreen extends React.Component {
   }
 
   componentWillMount() {
+    console.log('Main calendar screen will mount');
     this.updateMarks();
     this.forceUpdate();
   }
@@ -66,14 +68,21 @@ class MainCalendarScreen extends React.Component {
       this.props.navigation.navigate('BillAddScreen', {activeBillDate: asDate});
     };
     const marks = this.state.marks;
+    let calendarStyle = {
+      width: '100%'
+    };
     let calendar =
       (marks)
-        ? <Calendar markedDates={marks} onDayPress={_handleDayPress} />
-        : <Calendar onDayPress={_handleDayPress} />;
+        ? <Calendar style={calendarStyle} markedDates={marks} onDayPress={_handleDayPress} />
+        : <Calendar style={calendarStyle} onDayPress={_handleDayPress} />;
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth();
+    let bills = <BillList year={year} month={month} />;
     return (
       <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={[styles.contentContainer,styles.centered]}>
+        <ScrollView style={styles.container} contentContainerStyle={[styles.contentContainer]}>
           {calendar}
+          {bills}
         </ScrollView>
       </View>
     );

@@ -10,3 +10,9 @@
 6. Run `npm run bsb-watch` from this directory (in a separate terminal).
 7. Run `exp start` from this directory.
 8. Scan the QR code with the Expo app.
+
+## To build the .apk
+
+```
+exp build:android
+```
