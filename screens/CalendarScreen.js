@@ -21,7 +21,7 @@ import { WebBrowser } from 'expo';
 import { MonoText } from '../components/StyledText';
 import { Ionicons } from '@expo/vector-icons';
 
-import { Calendar, CalendarList } from 'react-native-calendars';
+import { Agenda, Calendar, CalendarList } from 'react-native-calendars';
 import { StackNavigator } from 'react-navigation';
 
 import { TextInputMask } from 'react-native-masked-text';
@@ -43,15 +43,43 @@ class MainCalendarScreen extends React.Component {
 
   updateMarks() {
     console.log('About to get dates');
-    let dates = Model.getBillsForMonth(2018, new Date().getMonth()).map((x, _) => x.date);
-    console.log('Dates: ', dates);
-    let marks = {};
-    for (let i in dates) {
-      console.log('i: ', i);
-      let date = dates[i];
-      let s = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-      marks[s] = { marked: true, dotColor: 'red' };
-    }
+    let bills =
+      Model
+        .getBillsForMonth(2018, new Date().getMonth())
+        .map((x) => {
+          let rv = {};
+          let date = x.date;
+          let month = date.getMonth() + 1;
+          if (month.toString().length < 2) {
+            month = '0' + month;
+          }
+          let day = date.getDate();
+          if (day.toString().length < 2) {
+            day = '0' + day;
+          }
+          let s = date.getFullYear() + '-' + month + '-' + day;
+          rv['date'] = s;
+          rv['color'] = Model.getCategoryColor(x.category);
+          rv['key'] = x.id;
+          return rv;
+        })
+        .reduce((acc, x) => {
+          if (!(acc[x.date])) {
+            acc[x.date] = {
+              dots: [{key: x.key, color: x.color, selectedDotColor: x.color}],
+              marked: true
+            };
+          } else {
+            let dots = acc[x.date].dots;
+            acc[x.date] = {
+              dots: [{key: x.key, color: x.color}, ...dots],
+              marked: true
+            };
+          }
+          return acc;
+        },
+        {});
+    let marks = bills;
     this.setState({marks});
   }
 
@@ -68,16 +96,24 @@ class MainCalendarScreen extends React.Component {
       this.props.navigation.navigate('BillAddScreen', {activeBillDate: asDate});
     };
     const marks = this.state.marks;
+    console.log('Marks: ', marks);
     let calendarStyle = {
       width: '100%'
     };
-    let calendar =
-      (marks)
-        ? <Calendar style={calendarStyle} markedDates={marks} onDayPress={_handleDayPress} />
-        : <Calendar style={calendarStyle} onDayPress={_handleDayPress} />;
+      //<Calendar style={calendarStyle} markedDates={marks} onDayPress={_handleDayPress} />;
     let year = new Date().getFullYear();
     let month = new Date().getMonth();
     let bills = <BillList year={year} month={month} />;
+    let calendar = (
+      <Calendar
+        markedDates={marks}
+        onDayPress={
+          (day) => {
+            console.log('this.state: ', this.state);
+            _handleDayPress(day)
+          }}
+        markingType={'multi-dot'} />);
+    console.log('calendar state: ', calendar.props);
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={[styles.contentContainer]}>

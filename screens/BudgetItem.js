@@ -16,30 +16,41 @@ export default class BudgetItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = this.state || {};
-    this.state.category = props.category.name;
+    this.state.category = props.category;
     this.parent = props.parent;
   }
 
   render() {
+    let self = this;
+    let spentSoFar =
+      Model
+        .getPaymentsForPeriod(new Date(), this.state.category.period)
+        .reduce((acc, x) => { return acc + x.amount }, 0);
+    console.log('Spent ', spentSoFar, ' so far');
     return(
-      <View style={[styles.horizontalContainer, {margin: 15, justifyContent: 'space-between'}]}>
-        <View
-          style={{
-            margin: 15,
-            marginLeft: 0,
-            width: 15,
-            height: 15,
-            backgroundColor: Model.getCategoryColor(this.state.category)
-          }} />
-        <Text style={[styles.bigText, {flex: 1, marginTop: 8}]}>{this.state.category}</Text>
-        <View style={{flex: 1}} />
-        <TouchableOpacity
-          onPress={
-            () => {
-              this.parent.props.navigation.navigate('CategoryAddScreen');
-            }}>
-          <Ionicons name="md-settings" size={32} color="green" />
-        </TouchableOpacity>
+      <View style={[styles.verticalContainer, {margin: 15, justifyContent: 'space-between'}]}>
+        <View style={[styles.horizontalContainer, {justifyContent: 'space-between'}]}>
+          <View
+            style={{
+              margin: 15,
+              marginLeft: 0,
+              width: 15,
+              height: 15,
+              backgroundColor: Model.getCategoryColor(this.state.category.name)
+            }} />
+          <Text style={[styles.bigText, {flex: 1, marginTop: 8}]}>{this.state.category.name}</Text>
+          <View style={{flex: 1}} />
+          <TouchableOpacity
+            onPress={
+              (() => {
+                self.parent.props.navigation.navigate('ModifyCategoryScreen', {category: this.state.category});
+              }).bind(this)}>
+            <Ionicons name="md-settings" size={32} color={Colors.tabIconDefault} />
+          </TouchableOpacity>
+        </View>
+        <View style={styles.horizontalContainer}>
+          <View style={{height: 10, flex: 1}} />
+        </View>
       </View>
     );
   }

@@ -76,6 +76,9 @@ addBill(
 
 let getCategoriesArray() = Array.of_list(model.contents.categories);
 
+let getCategoryByName(name) =
+  List.find((cat) => cat##name == name, model.contents.categories);
+
 let addCategory(nam) = {
   let model' = {...model.contents, categories: [nam, ...model.contents.categories]};
   model.contents = model'
@@ -87,6 +90,12 @@ let removeCategory(nam) = {
     |> List.filter((x) => x##name != nam);
   let model' = {...model.contents, categories: cats};
   model.contents = model'
+};
+
+let updateCategory(nam, value) = {
+  removeCategory(nam);
+  Js.log2("Adding category with amount ", value##amount);
+  addCategory(value)
 };
 
 let getPaymentsForPeriod(date: Date.t, period): array(Payment.t) = {
@@ -135,7 +144,7 @@ let getBillsForMonth(year, month): array(Payment.t) = {
               let rec aux(current) =
                 if (Infix.(Date.beginningOfMonth(current) < current)) {
                   if (Infix.(current < outerTest)) {
-                    let millis = days * (1000 * 60 * 60 * 24);
+                    let millis = float_of_int(days) *. (1000. *. 60. *. 60. *. 24.);
                     let next = Infix.(current + millis);
                     let existing =
                       try { Some(List.find(
