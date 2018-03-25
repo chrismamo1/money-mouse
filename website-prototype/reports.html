@@ -46,7 +46,24 @@ Released   : 20130902
 			<img src="images/pic01.jpg" alt="" class="image-full" />
 		</div>
         <h2>Reports</h2>
-
+        <button class="button" id="daily">Daily</button>
+        <button class="button" id="weekly">Weekly</button>
+        <button class="button" id="monthly">Monthly</button>
+        
+        <div style="display: none;" id="weekDiv">
+            <img src="images/report_weekly.png">
+        </div>
+        
+        <div style="display: none;" id="dayDiv">
+            <br /><br /><br />
+            No purchases were made today. If you're trying to save, that's a good way to do it!
+            <br /><br /><br />
+        </div>
+        
+        <div style="display: none;" id="monthDiv">
+            <img src="images/report_monthly.png">
+        </div>
+        
 		<div id="copyright">
             <span> This is a non-functional prototype intended to give a basic idea of the interface<br /></span>
             
@@ -54,5 +71,6 @@ Released   : 20130902
 		</div>
 	</div>
 </div>
+<script src="reports.js"></script>
 </body>
 </html>
