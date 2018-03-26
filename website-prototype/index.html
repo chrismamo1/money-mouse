@@ -53,6 +53,34 @@ Released   : 20130902
 				<h2>Most Recent Transactions</h2>
 				<span class="byline">Your five most recent transactions recorded by Money Mouse will be displayed here.</span>
 			</div>
+            
+            <button class="button" id="addTrans">Add Transaction</button>
+            
+            <div id="transModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                <p>
+                    Amount: <input type="number" step="0.01" placeholder="set bill amount"><br />
+                    Paid to: <input type="text" placeholder="payment to"><br />
+                    Category: 
+                    <select>
+                        <option value="necessities">Necessities</option>
+                        <option value="eatingOut">Eating Out</option>
+                        <option value="gas">Gas</option>
+                        <option value="luxury">Luxury</option>
+                    </select><br />
+                    Payment Type: 
+                    <select>
+                        <option value="cash">Cash</option>
+                        <option value="credit">Credit Card</option>
+                        <option value="debit">Debit Card</option>
+                        <option value="check">Check</option>
+                    </select><br />
+                    <button type="submit" id="submit">Submit</button>
+                </p>
+                </div>
+        </div>
+            
 			<ul class="style1">
 				<li class="first">
 					<p class="date">Jan<b>05</b></p>
@@ -99,5 +127,6 @@ Released   : 20130902
 		</div>
 	</div>
 </div>
+<script src="addTransaction.js"></script>
 </body>
 </html>
