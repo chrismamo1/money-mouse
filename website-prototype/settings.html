@@ -45,8 +45,27 @@ Released   : 20130902
 		<div id="banner">
 			<img src="images/pic01.jpg" alt="" class="image-full" />
 		</div>
-		<h2>Settings</h2>
+        <div>
+            <h2>Settings</h2>
+            Send me notifications about the following budgets:<br />
+            <p class="style1">
+                Necessities <input type="checkbox" value="necessities"  /><br />
+                Eating Out <input type="checkbox" value="eatingOut"  /><br /> 
+                Gas <input type="checkbox" value="gas"  /><br /> 
+                Luxury <input type="checkbox" value="luxury"  /><br /><br />
 
+                Notify me when I'm &nbsp;<input type="number" step=".01" placeholder="dollar amount">&nbsp; away from reaching budget limit.<br />
+
+                How often do you want to be updated on the amount remaining in the budget?
+                <select>
+                        <option value="necessities">Once</option>
+                        <option value="eatingOut">Daily</option>
+                        <option value="gas">Weekly</option>
+                        <option value="luxury">Monthly</option>
+                </select><br /><br />
+                <a href="settings.html" class="button">Submit</a>
+            </p>
+        </div>
 		<div id="copyright">
             <span> This is a non-functional prototype intended to give a basic idea of the interface<br /></span>
             
