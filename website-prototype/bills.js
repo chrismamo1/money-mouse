@@ -3,6 +3,7 @@
 
     var addBillBtn = document.getElementById('addBill');
     var submit = document.getElementById('submit');
+    var billPaid = document.getElementById('markBillPaid');
 
     function modalBillDue() {
         billModal.style.display = "block";
@@ -14,6 +15,10 @@
 
     var span = document.getElementsByClassName("close")[0];
     var span2 = document.getElementsByClassName("close")[1];
+
+    billPaid.onclick = function() {
+        billModal.style.display = "none";
+    }
 
     span.onclick = function() {
         nessModal.style.display = "none";
