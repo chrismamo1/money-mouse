@@ -28,3 +28,9 @@ let getBill(t) =
   | BillPayment(bill) => bill
   | OtherPayment(_) => raise(Failure("Cannot get bill: wrong type of payment"))
   };
+
+let getRecipient(t) =
+  switch t##about {
+  | BillPayment(bill) => bill.Bill.owedTo
+  | OtherPayment(x) => x
+  };

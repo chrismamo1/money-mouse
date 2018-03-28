@@ -24,14 +24,15 @@ class MainBudgetScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    let self = this;
     let getItems = () => {
       let categories = Model.getCategoriesArray();
-      let self = this;
+      console.log('Categories: ', categories);
       let items =
         categories.map(
           (nam, i) => {
-            //console.log('making ', nam);
-            return <BudgetItem key={nam + i} mom={self} category={nam} parent={self} />
+            console.log('making ', nam);
+            return <BudgetItem key={nam.name} mom={self} category={nam} parent={self} />
           });
       return items;
     };
@@ -39,8 +40,7 @@ class MainBudgetScreen extends React.Component {
     this.state.addingCategory = false;
     this.updateCategories = this.updateCategories.bind(this);
     this.pushCategory = this.pushCategory.bind(this);
-    this.getItems = getItems;
-    let self = this;
+    this.getItems = getItems.bind(this);
     //console.log('this.props.navigation: ', this.props.navigation);
     //this.props.navigation.addListener('willFocus', ((x) => self.updateCategories()));
   }
@@ -52,8 +52,8 @@ class MainBudgetScreen extends React.Component {
 
   pushCategory(nam) {
     Model.addCategory(nam);
-    this.setState({newCatName: undefined, addingCategory: false});
     this.updateCategories();
+    this.setState({newCatName: undefined, addingCategory: false});
   }
 
   render() {
@@ -65,7 +65,7 @@ class MainBudgetScreen extends React.Component {
           <TextInput
             style={[styles.textInput, {flex: 2}]}
             value={this.state.newCatName || ''}
-            onChange={(x) => this.setState({newCatName: x.nativeEvent.text})} />
+            onChangeText={(x, _) => this.setState({newCatName: x})} />
           <Button
             title="Done"
             style={[styles['2tite4me'], {flex: 1}]}
@@ -76,8 +76,6 @@ class MainBudgetScreen extends React.Component {
       header = <View />;
       footer = <Button onPress={() => this.setState({addingCategory: true})} title="Add Category" />;
     };
-    /* Go ahead and delete ExpoConfigView and replace it with your
-     * content, we just wanted to give you a quick view of your config */
     return (
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         {header}

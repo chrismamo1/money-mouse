@@ -2,6 +2,7 @@ import BillAddScreen from './BillAddScreen.js';
 import BillList from './BillList.js';
 
 import Colors from '../constants/Colors';
+import styles from '../constants/Styles';
 import React from 'react';
 import {
   Button,
@@ -34,18 +35,19 @@ class MainCalendarScreen extends React.Component {
   };
 
   constructor(props) {
-    console.log("Testing in constructor before super");
     super(props);
-    console.log("Testing in constructor");
     this.state = {};
     this.updateMarks = this.updateMarks.bind(this);
   }
 
   updateMarks() {
-    console.log('About to get dates');
+    console.log('Updating marks');
+    let year = new Date().getFullYear();
     let bills =
       Model
-        .getBillsForMonth(2018, new Date().getMonth())
+        .getBillsForMonth(year, new Date().getMonth())
+        //.concat(Model.getBillsForMonth(year, (new Date().getMonth()) + 1))
+        .filter(x => !x.filled)
         .map((x) => {
           let rv = {};
           let date = x.date;
@@ -64,17 +66,24 @@ class MainCalendarScreen extends React.Component {
           return rv;
         })
         .reduce((acc, x) => {
+          let selCol = (new Date(x.date) < new Date()) ? '#eF5050' : '#FFd530';
           if (!(acc[x.date])) {
             acc[x.date] = {
               dots: [{key: x.key, color: x.color, selectedDotColor: x.color}],
-              marked: true
+              marked: true,
+              selectedColor: selCol,
+              selected: true
             };
           } else {
-            let dots = acc[x.date].dots;
-            acc[x.date] = {
-              dots: [{key: x.key, color: x.color}, ...dots],
-              marked: true
-            };
+            if (acc[x.date].dots.every(dot => dot.key != x.key)) {
+              let dots = acc[x.date].dots;
+              acc[x.date] = {
+                dots: [{key: x.key, color: x.color}, ...dots],
+                marked: true,
+                selectedColor: selCol,
+                selected: true
+              };
+            }
           }
           return acc;
         },
@@ -87,6 +96,12 @@ class MainCalendarScreen extends React.Component {
     console.log('Main calendar screen will mount');
     this.updateMarks();
     this.forceUpdate();
+    let stateManager = (() => this.updateMarks()).bind(this);
+    Model.addStateManager("CalendarScreen", stateManager);
+  }
+
+  componentWillUnmount() {
+    Model.removeStateManager("CalendarScreen");
   }
 
   render() {
@@ -95,21 +110,21 @@ class MainCalendarScreen extends React.Component {
       console.log(asDate.toDateString());
       this.props.navigation.navigate('BillAddScreen', {activeBillDate: asDate});
     };
-    const marks = this.state.marks;
+    const marks = JSON.parse(JSON.stringify(this.state.marks));
     console.log('Marks: ', marks);
     let calendarStyle = {
       width: '100%'
     };
       //<Calendar style={calendarStyle} markedDates={marks} onDayPress={_handleDayPress} />;
+    let self = this;
     let year = new Date().getFullYear();
     let month = new Date().getMonth();
-    let bills = <BillList year={year} month={month} />;
+    let bills = <BillList parent={self} year={year} month={month} />;
     let calendar = (
       <Calendar
         markedDates={marks}
         onDayPress={
           (day) => {
-            console.log('this.state: ', this.state);
             _handleDayPress(day)
           }}
         markingType={'multi-dot'} />);
@@ -137,20 +152,3 @@ let CalendarScreen = StackNavigator(
 );
 
 export default CalendarScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  centered: {
-    alignItems: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  bigText: {
-    fontSize: 20,
-    fontWeight: "800"
-  }
-});

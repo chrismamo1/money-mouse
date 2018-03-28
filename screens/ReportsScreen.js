@@ -12,6 +12,9 @@ import * as Model from '../lib/es6/mm/mm_model.js';
 import * as MoneyModel from '../lib/es6/mm/money.js';
 import * as Spending_category from '../lib/es6/mm/spending_category.js';
 
+import CategoryIndicator from '../components/PaymentItem.js';
+import PaymentItem from '../components/PaymentItem.js';
+
 console.log('DateModel: ' + DateModel);
 
 class ReportViewScreen extends React.Component {
@@ -57,14 +60,20 @@ class ReportViewScreen extends React.Component {
         colours.push(Model.getCategoryColor(i));
         let str = MoneyModel.toString(MoneyModel.makeUsd(parts[i]));
         legend.push(
-          <View
+          <View>
+            <CategoryIndicator categoryName={i} />
+            <Text>{i}</Text>
+          </View>);
+          /*<View
             key={i}
             style={[styles.horizontalContainer, {flex: 5}]}>
             <View style={s} />
             <Text style={{fontSize: 30, flex: 2}}>{i} ({str})</Text>
-          </View>
-        )
+          </View>*/
       }
+      let paymentsElements = payments.map((x) => {
+        return <PaymentItem key={x.id} payment={x} />
+      });
       content = (
         <ScrollView contentContainerStyle={styles.centered}>
           <Text style={styles.bigText}>{periodSummaryText}</Text>
@@ -74,6 +83,7 @@ class ReportViewScreen extends React.Component {
             sliceColor={colours}
             />
           {legend}
+          {paymentsElements}
         </ScrollView>);
     } else {
       content = <Text>No payments found during this period</Text>;
