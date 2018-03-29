@@ -43,10 +43,10 @@ let removeStateManager(name) = {
 
 let getCategoryColor(cat) = {
   try {
-    let cat = List.find((x) => x##name == cat, model.contents.categories);
+    let cat = List.find((x) => x##name == cat, getModel().categories);
     cat##color
   } {
-    | Not_found => "#ffffff"
+    | Not_found => "#000000"
   }
 };
 

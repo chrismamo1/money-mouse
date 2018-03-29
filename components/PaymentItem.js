@@ -21,16 +21,14 @@ import * as Spending_category from '../lib/es6/mm/spending_category.js';
 export default class PaymentItem extends React.Component {
   constructor(props) {
     super(props);
-    this.props = props;
   }
 
   render() {
     let self = this;
-    console.log('payment: ', self.props.payment);
     return(
-      <View style={[styles.horizontalContainer]}>
+      <View style={[styles.horizontalContainer, {width: '100%'}]}>
         <CategoryIndicator categoryName={self.props.payment.category} />
-        <View>
+        <View style={{flex: 1}}>
           <Text>
             {Payment.getRecipient(self.props.payment)}
           </Text>
@@ -38,7 +36,7 @@ export default class PaymentItem extends React.Component {
             {DateModel.dateToString(self.props.payment.date)}
           </Text>
         </View>
-        <View>
+        <View style={[styles.horizontalContainer, {flex: 1, justifyContent: 'flex-end'}]}>
           <Text>
             {Money.toString(self.props.payment.amount)}
           </Text>

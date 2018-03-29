@@ -103,6 +103,7 @@ export default class BillList extends React.Component {
   }
 
   render() {
+    console.log('Bills: ', this.state.upcoming);
     let bills =
       this.state.upcoming.map(
         (bill, i) =>
@@ -115,7 +116,6 @@ export default class BillList extends React.Component {
             billId={bill.id}
             paymentObj={bill} />);
     let ids = this.state.upcoming.map((pymnt, _) => pymnt.id);
-    console.log('ID\'s:', ids);
     if (bills.length == 0) {
       bills = <Text>No upcoming bills in the next month</Text>;
     }
