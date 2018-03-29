@@ -4,7 +4,8 @@
   "scripts": {
     "test": "node ./node_modules/jest/bin/jest.js --watchAll",
     "bsb-watch": "bsb -w",
-    "bsb-clean": "bsb -clean"
+    "bsb-clean": "bsb -clean",
+    "bsb-version": "bsb -version"
   },
   "jest": {
     "preset": "jest-expo"
