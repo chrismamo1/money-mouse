@@ -12,6 +12,9 @@ import * as Model from '../lib/es6/mm/mm_model.js';
 import * as MoneyModel from '../lib/es6/mm/money.js';
 import * as Spending_category from '../lib/es6/mm/spending_category.js';
 
+import CategoryIndicator from '../components/CategoryIndicator.js';
+import PaymentItem from '../components/PaymentItem.js';
+
 console.log('DateModel: ' + DateModel);
 
 class ReportViewScreen extends React.Component {
@@ -39,11 +42,12 @@ class ReportViewScreen extends React.Component {
           .reduce(
             (acc, x, _) => {
               acc[x.category] = (acc[x.category] || 0.0) + MoneyModel.getAmount(x.amount);
-              return acc
+              return acc;
             },
             {},
             payments);
       console.log('Parts: ', parts);
+      console.log('Payments: ', payments);
       let series = [], colours = [];
       let legend = [];
       for (let i in parts) {
@@ -56,15 +60,20 @@ class ReportViewScreen extends React.Component {
         series.push(parts[i]);
         colours.push(Model.getCategoryColor(i));
         let str = MoneyModel.toString(MoneyModel.makeUsd(parts[i]));
-        legend.push(
-          <View
+        legend.push(<CategoryIndicator key={i} categoryName={i} />);
+          /*<View
             key={i}
             style={[styles.horizontalContainer, {flex: 5}]}>
             <View style={s} />
             <Text style={{fontSize: 30, flex: 2}}>{i} ({str})</Text>
-          </View>
-        )
+          </View>*/
       }
+      let paymentsElements = payments.map((x, _) => {
+        console.log('pre X: ', x);
+        let rv =  <PaymentItem key={x.id} payment={x} />;
+        console.log('done');
+        return rv;
+      });
       content = (
         <ScrollView contentContainerStyle={styles.centered}>
           <Text style={styles.bigText}>{periodSummaryText}</Text>
@@ -73,7 +82,10 @@ class ReportViewScreen extends React.Component {
             series={series}
             sliceColor={colours}
             />
-          {legend}
+          <View style={styles.horizontalContainer}>
+            {legend}
+          </View>
+          {paymentsElements}
         </ScrollView>);
     } else {
       content = <Text>No payments found during this period</Text>;

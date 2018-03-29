@@ -20,18 +20,21 @@ export default class ModifyCategoryScreen extends React.Component {
     this.state = {
       selectedPeriodValue: this.params.category.period,
       amountText: Spending_category.getFormattedAmountString(this.params.category),
-      categoryAmount: this.params.category.amount
+      categoryAmount: this.params.category.amount,
+      category: JSON.parse(JSON.stringify(this.params.category))
     };
   }
 
   onChangeAmount(amt) {
     let x = parseFloat(amt.replace('$', '').replace(',', ''));
-    this.setState({categoryAmount: x, amountText: amt})
+    let categoryAmount = x;
+    let amountText = amt;
+    this.setState({categoryAmount, amountText})
   }
 
   render() {
     console.log('Re-rendering...');
-    let cat = JSON.parse(JSON.stringify(this.params.category));
+    let cat = JSON.parse(JSON.stringify(this.state.category));
     cat.amount = this.state.categoryAmount;
     console.log('Setting new amount to ', cat.amount);
     cat.period = this.state.selectedPeriodValue;

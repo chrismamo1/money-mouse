@@ -13,7 +13,17 @@ type t =
   , color: string
   });
 
-let make(name, period, amount, color): t =
+let colors = [
+  "#df7a7a",
+  "#7adf7a",
+  "#74d9da",
+  "#7a7adf",
+  "#d9da74",
+  "#d974da",
+  "#dad974"
+];
+
+let make(~color, name, period, amount): t =
   {"name": name, "period": period, "amount": amount, "color": color};
 
 let getFormattedAmountString(t) = {
@@ -24,12 +34,9 @@ let getFormattedAmountString(t) = {
     | n => aux([string_of_int(n), ...acc], x / 1_000)
     };
   let parts = aux([], intPart);
-  Js.log2("Parts: ", parts);
   let wholePart = String.concat(",", parts);
-  Js.log2("wholePart: ", wholePart);
   let decPart = String.sub(Printf.sprintf("%.2f", t##amount -. float_of_int(intPart)), 1, 3);
   let rv = "$" ++ wholePart ++ decPart;
-  Js.log2("Made amount string: ", rv);
   rv
 };
 

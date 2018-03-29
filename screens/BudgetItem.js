@@ -1,4 +1,5 @@
 import Colors from '../constants/Colors';
+import styles from '../constants/Styles';
 import React from 'react';
 import {
   Button,
@@ -17,15 +18,32 @@ export default class BudgetItem extends React.Component {
     super(props);
     this.state = this.state || {};
     this.state.category = props.category;
+    this.state.spentSoFar =
+      Model
+      .getPaymentsForPeriod(new Date(), this.state.category.period)
+      .reduce((acc, x) => { return acc + x.amount }, 0);
     this.parent = props.parent;
+  }
+
+  componentWillMount() {
+    let stateManager = () => {
+      let spentSoFar = Model
+        .getPaymentsForPeriod(new Date(), this.state.category.period)
+        .reduce((acc, x) => { return acc + x.amount }, 0);
+      let category = Model.getCategoryByName(this.state.category.name);
+      console.log('Setting budgetItem\'s state to include a category with amount of ' + category.amount);
+      this.setState({spentSoFar, category});
+    };
+    //Model.addStateManager('BudgetItem' + this.state.category.name, stateManager.bind(this));
+  }
+
+  componentWillUnmount() {
+    //Model.removeStateManager('BudgetItem' + this.state.category.name);
   }
 
   render() {
     let self = this;
-    let spentSoFar =
-      Model
-        .getPaymentsForPeriod(new Date(), this.state.category.period)
-        .reduce((acc, x) => { return acc + x.amount }, 0);
+    let spentSoFar = this.state.spentSoFar;
     console.log('Spent ', spentSoFar, ' so far');
     return(
       <View style={[styles.verticalContainer, {margin: 15, justifyContent: 'space-between'}]}>
@@ -55,28 +73,3 @@ export default class BudgetItem extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  verticalContainer: {
-    flex: 1,
-    flexDirection: 'column'
-  },
-  horizontalContainer: {
-    flex: 1,
-    flexDirection: 'row'
-  },
-  centered: {
-    alignItems: 'center',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  bigText: {
-    fontSize: 20,
-    fontWeight: "800"
-  }
-});

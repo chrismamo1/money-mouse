@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import Colors from './Colors.js';
 
 export default styles = StyleSheet.create({
   container: {
@@ -25,6 +26,13 @@ export default styles = StyleSheet.create({
   },
   contentText: {
     fontSize: 18,
+  },
+  smallText: {
+    fontSize: 10,
+  },
+  secondaryText: {
+    color: Colors.tabIconDefault,
+    fontWeight: "200"
   },
   textInput: {
     fontSize: 20,

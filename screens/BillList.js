@@ -1,4 +1,5 @@
 import Colors from '../constants/Colors';
+import styles from '../constants/Styles';
 import React from 'react';
 import {
   Button,
@@ -13,6 +14,8 @@ import {
   View
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
+import CategoryIndicator from '../components/CategoryIndicator.js';
 
 import * as Model from '../lib/es6/mm/mm_model.js';
 import * as BillModel from '../lib/es6/mm/bill.js';
@@ -43,23 +46,22 @@ class Bill extends React.Component {
 
   render() {
     return(
-      <View style={[styles.horizontalContainer, {padding: 15}]}>
-        <View
-          style={{
-            margin: 15,
-            marginLeft: 0,
-            width: 15,
-            height: 15,
-            backgroundColor: Model.getCategoryColor(this.state.paymentObj.category)
-          }} />
+      <View style={[styles.horizontalContainer, styles.centered, {padding: 5}]}>
+        <CategoryIndicator categoryName={this.state.paymentObj.category} />
         <View>
           <Text style={styles.bigText}>{this.state.name}</Text>
-          <Text>{DateModel.dateToString(this.state.date)}</Text>
+          <Text style={[styles.smallText, styles.secondaryText]}>
+            {DateModel.dateToString(this.state.date)}
+          </Text>
         </View>
-        <Text style={[styles.bigText, {flex: 1}]}>{this.state.amount}</Text>
+        <View style={[styles.horizontalContainer, {justifyContent: 'flex-end'}]}>
+          <Text style={[styles.contentText, styles.secondaryText, {marginRight: 5}]}>
+            {this.state.amount}
+          </Text>
+        </View>
         <TouchableOpacity
           onPress={this.onFinalize}
-          style={{width: 32, height: 32, margin: 5}}>
+          style={{width: 32, height: 32, margin: 0}}>
           <Ionicons name="md-checkmark" size={32} color="green" />
         </TouchableOpacity>
       </View>
@@ -83,16 +85,13 @@ export default class BillList extends React.Component {
         .filter((payment, _) => !(payment.filled))
         .sort((a, b) => a.date - b.date);
     this.handleFinalization = this.handleFinalization.bind(this);
+    this.parent = props.parent;
   }
 
   handleFinalization() {
     let props = this.props;
     let bills = Model.getBillsForMonth(props.year, props.month);
-    if (props.month == 11) {
-      bills = bills.concat(Model.getBillsForMonth(props.year + 1, 0));
-    } else {
-      bills = bills.concat(Model.getBillsForMonth(props.year, props.month + 1));
-    }
+    bills = bills.concat(Model.getBillsForMonth(props.year, props.month + 1));
     let upcoming =
       bills
         .filter((payment, _) => !(payment.filled))
@@ -100,9 +99,11 @@ export default class BillList extends React.Component {
     console.log("Making bill list with " + upcoming.length + " bills");
     console.log(bills);
     this.setState({upcoming});
+    this.parent.updateMarks();
   }
 
   render() {
+    console.log('Bills: ', this.state.upcoming);
     let bills =
       this.state.upcoming.map(
         (bill, i) =>
@@ -115,19 +116,18 @@ export default class BillList extends React.Component {
             billId={bill.id}
             paymentObj={bill} />);
     let ids = this.state.upcoming.map((pymnt, _) => pymnt.id);
-    console.log('ID\'s:', ids);
     if (bills.length == 0) {
       bills = <Text>No upcoming bills in the next month</Text>;
     }
     return(
       <View>
-        <Text style={[styles.bigText, {paddingBottom: 10}]}>Upcoming Bills</Text>
+        <Text style={[styles.contentText, {marginLeft: 5}]}>Upcoming Bills</Text>
         {bills}
       </View>);
   }
 }
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
@@ -154,4 +154,4 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontWeight: "800"
   }
-});
+});*/
