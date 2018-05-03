@@ -1,0 +1,61 @@
+{
+  "_from": "git://github.com/chrismamo1/react-native-calendars.git",
+  "_id": "react-native-calendars@1.17.6-moneymouse",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/react-native-calendars",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "react-native-calendars@git://github.com/chrismamo1/react-native-calendars.git",
+    "name": "react-native-calendars",
+    "escapedName": "react-native-calendars",
+    "rawSpec": "git://github.com/chrismamo1/react-native-calendars.git",
+    "saveSpec": "git://github.com/chrismamo1/react-native-calendars.git",
+    "fetchSpec": "git://github.com/chrismamo1/react-native-calendars.git",
+    "gitCommittish": null
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git://github.com/chrismamo1/react-native-calendars.git#a44f3b867a119e87b209b0da5155a20397786368",
+  "_spec": "react-native-calendars@git://github.com/chrismamo1/react-native-calendars.git",
+  "_where": "/home/chrismamo1/Documents/hci/money-mouse",
+  "author": {
+    "name": "Wix.com"
+  },
+  "bugs": {
+    "url": "https://github.com/wix/react-native-calendars/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "xdate": "^0.8.0"
+  },
+  "deprecated": false,
+  "description": "React Native Calendar Components",
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^7.0.0",
+    "jasmine": "^2.5.2",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.47.2"
+  },
+  "homepage": "https://github.com/wix/react-native-calendars#readme",
+  "license": "MIT",
+  "main": "src/index.js",
+  "name": "react-native-calendars",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix/react-native-calendars.git"
+  },
+  "scripts": {
+    "lint": "eslint src/ example/src",
+    "test": "jasmine src/*.spec.js && npm run lint"
+  },
+  "version": "1.17.6-moneymouse"
+}

@@ -1,0 +1,54 @@
+{
+  "_args": [
+    [
+      "react-native-pie-chart@1.0.13",
+      "/home/chrismamo1/Documents/hci/money-mouse"
+    ]
+  ],
+  "_from": "react-native-pie-chart@1.0.13",
+  "_id": "react-native-pie-chart@1.0.13",
+  "_inBundle": false,
+  "_integrity": "sha512-3SYGGDq3ZnL6kJNeaFxd7BHqBU1+umD9POYYlGMlYEE0sPpZ7Pw+kgiPcm70xUP9Kuj8/def3A2/0krOtNhohA==",
+  "_location": "/react-native-pie-chart",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "react-native-pie-chart@1.0.13",
+    "name": "react-native-pie-chart",
+    "escapedName": "react-native-pie-chart",
+    "rawSpec": "1.0.13",
+    "saveSpec": null,
+    "fetchSpec": "1.0.13"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-pie-chart/-/react-native-pie-chart-1.0.13.tgz",
+  "_spec": "1.0.13",
+  "_where": "/home/chrismamo1/Documents/hci/money-mouse",
+  "author": {
+    "name": "Gene Xu"
+  },
+  "bugs": {
+    "url": "https://github.com/genexu/react-native-pie-chart/issues"
+  },
+  "description": "pie chart for react native",
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "eslint-plugin-react": "^6.4.1"
+  },
+  "homepage": "https://github.com/genexu/react-native-pie-chart#readme",
+  "license": "MIT",
+  "main": "./src/index.js",
+  "name": "react-native-pie-chart",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/genexu/react-native-pie-chart.git"
+  },
+  "scripts": {
+    "lint": "node ./node_modules/.bin/eslint ./src",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.0.13"
+}

@@ -1,0 +1,28 @@
+dependencies: \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTModuleMethod.mm \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTModuleMethod.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTBridgeMethod.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTNullability.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTCxxConvert.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTManagedPointer.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Base/RCTParserUtils.h \
+  /Users/genexu/projects/maintain/react-native-pie-chart/example/node_modules/react-native/React/Profiler/RCTProfile.h

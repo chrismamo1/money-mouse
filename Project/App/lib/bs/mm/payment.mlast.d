@@ -1,0 +1,1 @@
+mm/payment.cmj : mm/bill.cmj mm/date.cmj mm/money.cmj
